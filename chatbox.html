@@ -1,0 +1,89 @@
+<html>
+ <head>
+  
+  <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+   
+  
+
+
+  <style>
+   #container{
+	
+     width:400px;
+     height:400px;
+     border:1px solid red;
+     overflow: scroll;
+
+   }
+   #text_box{
+     
+     width:300px;
+     height:30px;
+     resize:none;
+
+   }
+   #username{
+
+     color:blue;
+     font-weight: bold;
+   }
+  </style>
+
+ </head>
+
+
+ <body>
+
+
+  <div id="container" >
+  </div><br />
+  <textarea id="text_box"  placeholder="Enter your message..."></textarea>
+  <button id="btn" >SEND</button><br/>
+  <input id="check" type="checkbox" checked> Press enter to send
+  
+<script type="text/javascript">
+  
+   $(document).ready(function(){
+
+    $("#text_box").keypress(function(event){
+
+      if(event.which==13){
+        if($("#check").prop("checked")){
+          $("#btn").click();
+          event.preventDefault();
+
+        }
+        
+      }
+
+     
+
+    
+    });
+
+    $("#btn").click(function(){
+      if($("#text_box").val()!=""){
+
+        var username="<span id='username'>You : </span>";
+        var prev_msg=$("#container").html();
+        var msg=username + $("#text_box").val();
+        $("#text_box").val("");
+        $("#container").html(prev_msg + "<br/>" + msg);
+        $("#container").scrollTop($("#container").prop("scrollHeight"));}
+    
+
+      else{
+        var prev_msg=$("#container").html();
+      
+        $("#text_box").val("");
+        $("#container").html(prev_msg);
+        $("#container").scrollTop($("#container").prop("scrollHeight"));
+      }
+    });
+
+   
+  });
+ 
+</script>
+ </body>
+</html>
